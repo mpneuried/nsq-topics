@@ -9,8 +9,6 @@ Nsq helper to poll a nsqlookupd service for all it's topics and reflect it local
 
 [![NPM](https://nodei.co/npm/nsq-topics.png?downloads=true&stars=true)](https://nodei.co/npm/nsq-topics/)
 
-*Written in coffee-script*
-
 **INFO: all examples are written in coffee-script**
 
 ## Install
