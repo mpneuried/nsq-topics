@@ -1,7 +1,7 @@
 {
   "name": "nsq-topics",
-  "version": "0.0.1",
-  "description": "Nsq helper to poll a nsqlookupd service for all it's topics and reflect it local.",
+  "version": "0.0.2",
+  "description": "Nsq helper to poll a nsqlookupd service for all it's topics and mirror it locally.",
   "keywords": [],
   "homepage": "https://github.com/mpneuried/nsq-topics",
   "bugs": "https://github.com/mpneuried/nsq-topics/issues",
@@ -39,6 +39,7 @@
     "grunt-mocha-cli": "*",
     "grunt-regarde": "*",
     "morgan": "^1.6.1",
-    "should": "4.3.x"
+    "should": "4.3.x",
+    "should-sinon": "0.0.3"
   }
 }
