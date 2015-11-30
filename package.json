@@ -29,13 +29,16 @@
     "mpbasic": "0.0.x"
   },
   "devDependencies": {
-    "should": "4.3.x",
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
     "grunt": "0.4.x",
-    "grunt-regarde": "*",
+    "grunt-contrib-clean": "*",
     "grunt-contrib-coffee": "*",
+    "grunt-docker": "0.0.x",
     "grunt-include-replace": "*",
     "grunt-mocha-cli": "*",
-    "grunt-docker": "0.0.x",
-    "grunt-contrib-clean": "*"
+    "grunt-regarde": "*",
+    "morgan": "^1.6.1",
+    "should": "4.3.x"
   }
 }

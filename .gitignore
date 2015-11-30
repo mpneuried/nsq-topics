@@ -4,6 +4,8 @@
 *.DS_Store
 *.zip
 *.rdb
+*.dat
+*.data
 
 .project
 .settings
@@ -14,4 +16,5 @@
 config.json
 config*.json
 deploy.json
+*.js
 /node_modules
