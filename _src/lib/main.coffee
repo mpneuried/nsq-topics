@@ -19,7 +19,7 @@ class NsqTopics extends require( "mpbasic" )()
 	defaults: =>
 		@extend super,
 			# **lookupdHTTPAddresses** *String|String[]* A single or multiple nsqlookupd hosts.
-			lookupdHTTPAddresses: [ "127.0.0.1:4161", "127.0.0.1:4163" ]
+			lookupdHTTPAddresses: [ "127.0.0.1:4161" ]
 			# **lookupdHTTPAddresses** *Number* Time in seconds to poll the nsqlookupd servers to sync the availible topics
 			lookupdPollInterval: 60
 			# **topicFilter** *Null|String|Array|RegExp|Function* A filter to reduce the returned topics
