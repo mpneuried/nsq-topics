@@ -48,55 +48,57 @@
 <a class="line-num" href="#line-9" id="line-9">9</a>  
 <a class="line-num" href="#line-10" id="line-10">10</a>  <span class="k">class</span> <span class="nx">TopicSimulator</span> <span class="k">extends</span> <span class="nx">require</span><span class="p">(</span><span class="s">&#39;events&#39;</span><span class="p">).</span><span class="nx">EventEmitter</span>
 <a class="line-num" href="#line-11" id="line-11">11</a>    <span class="nv">servers: </span><span class="p">[]</span>
-<a class="line-num" href="#line-12" id="line-12">12</a>    <span class="nv">serverPorts: </span><span class="p">[</span> <span class="mi">4161</span><span class="p">,</span> <span class="mi">4163</span> <span class="p">]</span>
-<a class="line-num" href="#line-13" id="line-13">13</a>    
-<a class="line-num" href="#line-14" id="line-14">14</a>    <span class="nv">constructor: </span><span class="nf">-&gt;</span>
-<a class="line-num" href="#line-15" id="line-15">15</a>      <span class="vi">@running = </span><span class="kc">false</span>
-<a class="line-num" href="#line-16" id="line-16">16</a>      <span class="vi">@started = </span><span class="mi">0</span>
-<a class="line-num" href="#line-17" id="line-17">17</a>      
-<a class="line-num" href="#line-18" id="line-18">18</a>      <span class="vi">@app = </span><span class="nx">express</span><span class="p">()</span>
-<a class="line-num" href="#line-19" id="line-19">19</a>      <span class="nx">@app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="nx">morgan</span><span class="p">(</span><span class="s">&#39;dev&#39;</span><span class="p">)</span> <span class="p">)</span>
-<a class="line-num" href="#line-20" id="line-20">20</a>      
-<a class="line-num" href="#line-21" id="line-21">21</a>      <span class="nx">@</span><span class="kc">on</span><span class="p">(</span> <span class="s">&quot;started&quot;</span><span class="p">,</span> <span class="nx">@checkRunning</span> <span class="p">)</span>
-<a class="line-num" href="#line-22" id="line-22">22</a>      
-<a class="line-num" href="#line-23" id="line-23">23</a>      <span class="nx">@createRoutes</span><span class="p">()</span>
-<a class="line-num" href="#line-24" id="line-24">24</a>      <span class="nx">@start</span><span class="p">()</span>
-<a class="line-num" href="#line-25" id="line-25">25</a>      <span class="k">return</span>
-<a class="line-num" href="#line-26" id="line-26">26</a>    
-<a class="line-num" href="#line-27" id="line-27">27</a>    <span class="nv">createRoutes: </span><span class="o">=&gt;</span>
-<a class="line-num" href="#line-28" id="line-28">28</a>      <span class="nx">@app</span><span class="p">.</span><span class="nx">get</span> <span class="s">&quot;/topics&quot;</span><span class="p">,</span> <span class="nf">( req, res )-&gt;</span>
-<a class="line-num" href="#line-29" id="line-29">29</a>        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span> <span class="mi">200</span> <span class="p">).</span><span class="nx">send</span><span class="p">(</span> <span class="nx">test</span><span class="p">()</span> <span class="p">)</span>
-<a class="line-num" href="#line-30" id="line-30">30</a>        <span class="k">return</span>
-<a class="line-num" href="#line-31" id="line-31">31</a>      
-<a class="line-num" href="#line-32" id="line-32">32</a>      <span class="k">return</span>
+<a class="line-num" href="#line-12" id="line-12">12</a>    <span class="nv">serverPorts: </span><span class="p">[</span> <span class="mi">4165</span><span class="p">,</span> <span class="mi">4167</span> <span class="p">]</span>
+<a class="line-num" href="#line-13" id="line-13">13</a>    <span class="nv">host: </span><span class="s">&quot;127.0.0.1&quot;</span>
+<a class="line-num" href="#line-14" id="line-14">14</a>    
+<a class="line-num" href="#line-15" id="line-15">15</a>    <span class="nv">constructor: </span><span class="nf">-&gt;</span>
+<a class="line-num" href="#line-16" id="line-16">16</a>      <span class="vi">@running = </span><span class="kc">false</span>
+<a class="line-num" href="#line-17" id="line-17">17</a>      <span class="vi">@started = </span><span class="mi">0</span>
+<a class="line-num" href="#line-18" id="line-18">18</a>      
+<a class="line-num" href="#line-19" id="line-19">19</a>      <span class="vi">@app = </span><span class="nx">express</span><span class="p">()</span>
+<a class="line-num" href="#line-20" id="line-20">20</a>      <span class="nx">@app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="nx">morgan</span><span class="p">(</span><span class="s">&#39;dev&#39;</span><span class="p">)</span> <span class="p">)</span>
+<a class="line-num" href="#line-21" id="line-21">21</a>      
+<a class="line-num" href="#line-22" id="line-22">22</a>      <span class="nx">@</span><span class="kc">on</span><span class="p">(</span> <span class="s">&quot;started&quot;</span><span class="p">,</span> <span class="nx">@checkRunning</span> <span class="p">)</span>
+<a class="line-num" href="#line-23" id="line-23">23</a>      
+<a class="line-num" href="#line-24" id="line-24">24</a>      <span class="nx">@createRoutes</span><span class="p">()</span>
+<a class="line-num" href="#line-25" id="line-25">25</a>      <span class="nx">@start</span><span class="p">()</span>
+<a class="line-num" href="#line-26" id="line-26">26</a>      <span class="k">return</span>
+<a class="line-num" href="#line-27" id="line-27">27</a>    
+<a class="line-num" href="#line-28" id="line-28">28</a>    <span class="nv">createRoutes: </span><span class="o">=&gt;</span>
+<a class="line-num" href="#line-29" id="line-29">29</a>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;called topics&quot;</span>
+<a class="line-num" href="#line-30" id="line-30">30</a>      <span class="nx">@app</span><span class="p">.</span><span class="nx">get</span> <span class="s">&quot;/topics&quot;</span><span class="p">,</span> <span class="nf">( req, res )-&gt;</span>
+<a class="line-num" href="#line-31" id="line-31">31</a>        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span> <span class="mi">200</span> <span class="p">).</span><span class="nx">send</span><span class="p">(</span> <span class="nx">test</span><span class="p">()</span> <span class="p">)</span>
+<a class="line-num" href="#line-32" id="line-32">32</a>        <span class="k">return</span>
 <a class="line-num" href="#line-33" id="line-33">33</a>      
-<a class="line-num" href="#line-34" id="line-34">34</a>    <span class="nv">checkRunning: </span><span class="o">=&gt;</span>
-<a class="line-num" href="#line-35" id="line-35">35</a>      <span class="k">if</span> <span class="nx">@started</span> <span class="o">is</span> <span class="nx">@serverPorts</span><span class="p">.</span><span class="nx">length</span>
-<a class="line-num" href="#line-36" id="line-36">36</a>        <span class="vi">@running = </span><span class="kc">true</span>
-<a class="line-num" href="#line-37" id="line-37">37</a>        <span class="nx">@emit</span> <span class="s">&quot;running&quot;</span><span class="p">,</span> <span class="nx">@servers</span>
-<a class="line-num" href="#line-38" id="line-38">38</a>      <span class="k">return</span>
-<a class="line-num" href="#line-39" id="line-39">39</a>    
-<a class="line-num" href="#line-40" id="line-40">40</a>    <span class="nv">start: </span><span class="o">=&gt;</span>
-<a class="line-num" href="#line-41" id="line-41">41</a>      <span class="vi">@started = </span><span class="mi">0</span>
-<a class="line-num" href="#line-42" id="line-42">42</a>      <span class="nv">_that = </span><span class="nx">@</span>
-<a class="line-num" href="#line-43" id="line-43">43</a>      <span class="k">for</span> <span class="nx">port</span> <span class="k">in</span> <span class="nx">@serverPorts</span>
-<a class="line-num" href="#line-44" id="line-44">44</a>        <span class="nx">@servers</span><span class="p">.</span><span class="nx">push</span> <span class="nx">@app</span><span class="p">.</span><span class="nx">listen</span> <span class="nx">port</span><span class="p">,</span> <span class="nf">-&gt;</span>
-<a class="line-num" href="#line-45" id="line-45">45</a>          <span class="nv">port = </span><span class="nx">@address</span><span class="p">().</span><span class="nx">port</span>
-<a class="line-num" href="#line-46" id="line-46">46</a>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s">&quot;NSQlookupd Simulation listening on port `%s`&quot;</span><span class="p">,</span> <span class="nx">port</span> <span class="p">)</span>
-<a class="line-num" href="#line-47" id="line-47">47</a>          <span class="nx">_that</span><span class="p">.</span><span class="nx">started</span><span class="o">++</span>
-<a class="line-num" href="#line-48" id="line-48">48</a>          <span class="nx">_that</span><span class="p">.</span><span class="nx">emit</span> <span class="s">&quot;started&quot;</span><span class="p">,</span> <span class="nx">@address</span><span class="p">()</span>
-<a class="line-num" href="#line-49" id="line-49">49</a>          <span class="k">return</span>
-<a class="line-num" href="#line-50" id="line-50">50</a>      <span class="k">return</span>
-<a class="line-num" href="#line-51" id="line-51">51</a>      
-<a class="line-num" href="#line-52" id="line-52">52</a>    <span class="nv">stop: </span><span class="nf">( idx = 0 )=&gt;</span>
-<a class="line-num" href="#line-53" id="line-53">53</a>      <span class="k">if</span> <span class="nx">@servers</span><span class="p">[</span> <span class="nx">idx</span> <span class="p">]</span><span class="o">?</span>
-<a class="line-num" href="#line-54" id="line-54">54</a>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s">&quot;NSQlookupd Simulation on port `%s` - SHUTDOWN!&quot;</span><span class="p">,</span> <span class="nx">@servers</span><span class="p">[</span> <span class="nx">idx</span> <span class="p">].</span><span class="nx">address</span><span class="p">().</span><span class="nx">port</span> <span class="p">)</span>
-<a class="line-num" href="#line-55" id="line-55">55</a>        <span class="nx">@servers</span><span class="p">[</span> <span class="nx">idx</span> <span class="p">].</span><span class="nx">close</span><span class="p">()</span>
-<a class="line-num" href="#line-56" id="line-56">56</a>        <span class="nx">@servers</span><span class="p">[</span> <span class="nx">idx</span> <span class="p">]</span> <span class="o">=</span> <span class="kc">null</span>
-<a class="line-num" href="#line-57" id="line-57">57</a>      <span class="k">return</span>
-<a class="line-num" href="#line-58" id="line-58">58</a>  
-<a class="line-num" href="#line-59" id="line-59">59</a>  <span class="nv">module.exports = </span><span class="k">new</span> <span class="nx">TopicSimulator</span><span class="p">()</span>
-<a class="line-num" href="#line-60" id="line-60">60</a>  </pre></div>
+<a class="line-num" href="#line-34" id="line-34">34</a>      <span class="k">return</span>
+<a class="line-num" href="#line-35" id="line-35">35</a>      
+<a class="line-num" href="#line-36" id="line-36">36</a>    <span class="nv">checkRunning: </span><span class="o">=&gt;</span>
+<a class="line-num" href="#line-37" id="line-37">37</a>      <span class="k">if</span> <span class="nx">@started</span> <span class="o">is</span> <span class="nx">@serverPorts</span><span class="p">.</span><span class="nx">length</span>
+<a class="line-num" href="#line-38" id="line-38">38</a>        <span class="vi">@running = </span><span class="kc">true</span>
+<a class="line-num" href="#line-39" id="line-39">39</a>        <span class="nx">@emit</span> <span class="s">&quot;running&quot;</span><span class="p">,</span> <span class="nx">@servers</span>
+<a class="line-num" href="#line-40" id="line-40">40</a>      <span class="k">return</span>
+<a class="line-num" href="#line-41" id="line-41">41</a>    
+<a class="line-num" href="#line-42" id="line-42">42</a>    <span class="nv">start: </span><span class="o">=&gt;</span>
+<a class="line-num" href="#line-43" id="line-43">43</a>      <span class="vi">@started = </span><span class="mi">0</span>
+<a class="line-num" href="#line-44" id="line-44">44</a>      <span class="nv">_that = </span><span class="nx">@</span>
+<a class="line-num" href="#line-45" id="line-45">45</a>      <span class="k">for</span> <span class="nx">port</span> <span class="k">in</span> <span class="nx">@serverPorts</span>
+<a class="line-num" href="#line-46" id="line-46">46</a>        <span class="nx">@servers</span><span class="p">.</span><span class="nx">push</span> <span class="nx">@app</span><span class="p">.</span><span class="nx">listen</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">@host</span><span class="p">,</span> <span class="nf">-&gt;</span>
+<a class="line-num" href="#line-47" id="line-47">47</a>          <span class="nv">port = </span><span class="nx">@address</span><span class="p">().</span><span class="nx">port</span>
+<a class="line-num" href="#line-48" id="line-48">48</a>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s">&quot;NSQlookupd Simulation listening on port `%s`&quot;</span><span class="p">,</span> <span class="nx">port</span> <span class="p">)</span>
+<a class="line-num" href="#line-49" id="line-49">49</a>          <span class="nx">_that</span><span class="p">.</span><span class="nx">started</span><span class="o">++</span>
+<a class="line-num" href="#line-50" id="line-50">50</a>          <span class="nx">_that</span><span class="p">.</span><span class="nx">emit</span> <span class="s">&quot;started&quot;</span><span class="p">,</span> <span class="nx">@address</span><span class="p">()</span>
+<a class="line-num" href="#line-51" id="line-51">51</a>          <span class="k">return</span>
+<a class="line-num" href="#line-52" id="line-52">52</a>      <span class="k">return</span>
+<a class="line-num" href="#line-53" id="line-53">53</a>      
+<a class="line-num" href="#line-54" id="line-54">54</a>    <span class="nv">stop: </span><span class="nf">( idx = 0 )=&gt;</span>
+<a class="line-num" href="#line-55" id="line-55">55</a>      <span class="k">if</span> <span class="nx">@servers</span><span class="p">[</span> <span class="nx">idx</span> <span class="p">]</span><span class="o">?</span>
+<a class="line-num" href="#line-56" id="line-56">56</a>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s">&quot;NSQlookupd Simulation on port `%s` - SHUTDOWN!&quot;</span><span class="p">,</span> <span class="nx">@servers</span><span class="p">[</span> <span class="nx">idx</span> <span class="p">].</span><span class="nx">address</span><span class="p">().</span><span class="nx">port</span> <span class="p">)</span>
+<a class="line-num" href="#line-57" id="line-57">57</a>        <span class="nx">@servers</span><span class="p">[</span> <span class="nx">idx</span> <span class="p">].</span><span class="nx">close</span><span class="p">()</span>
+<a class="line-num" href="#line-58" id="line-58">58</a>        <span class="nx">@servers</span><span class="p">[</span> <span class="nx">idx</span> <span class="p">]</span> <span class="o">=</span> <span class="kc">null</span>
+<a class="line-num" href="#line-59" id="line-59">59</a>      <span class="k">return</span>
+<a class="line-num" href="#line-60" id="line-60">60</a>  
+<a class="line-num" href="#line-61" id="line-61">61</a>  <span class="nv">module.exports = </span><span class="k">new</span> <span class="nx">TopicSimulator</span><span class="p">()</span>
+<a class="line-num" href="#line-62" id="line-62">62</a>  </pre></div>
         </td>
       </tr>
   </tbody>

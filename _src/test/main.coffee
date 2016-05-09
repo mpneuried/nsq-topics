@@ -1,5 +1,5 @@
 should = require('should')
-_ = require('lodash')
+_difference = require('lodash/difference')
 
 NsqTopics = require( "../." )
 
@@ -26,23 +26,24 @@ _testArray = ( inp, pred )->
 	
 _setAddresses = ( servers )->
 	for server in servers
-		CNF.lookupdHTTPAddresses.push server.address().address + "" + server.address().port
+		CNF.lookupdHTTPAddresses.push server.address().address + ":" + server.address().port
 	return
 
 describe "----- hyperrequest TESTS -----", ->
 
 	before ( done )->
 		topicSimulator = require( "./server" )
-		nsqTopics = new NsqTopics( CNF )
 		
 		if topicSimulator.running
 			_setAddresses( topicSimulator.servers )
+			nsqTopics = new NsqTopics( CNF )
 			done()
 			return
 		
 		topicSimulator.on "running", ( servers )->
 			# wait until simulation server is running
 			_setAddresses( servers )
+			nsqTopics = new NsqTopics( CNF )
 			done()
 			return
 		return
@@ -83,7 +84,7 @@ describe "----- hyperrequest TESTS -----", ->
 				nsqTopics.on( "add", _check )
 				
 				# step to the next test
-				_topicsDiff = _.difference( test.next().list(), _before )
+				_topicsDiff = _difference( test.next().list(), _before )
 				
 				return
 			return
@@ -115,7 +116,7 @@ describe "----- hyperrequest TESTS -----", ->
 				nsqTopics.on( "add", _check )
 				
 				# step to the next test
-				_topicsDiff = _.difference( test.next().list(), _before )
+				_topicsDiff = _difference( test.next().list(), _before )
 				
 				return
 			return
@@ -158,7 +159,7 @@ describe "----- hyperrequest TESTS -----", ->
 			
 			# step to the next test
 			_before = test.list()
-			_topicsDiff = _.difference( _before, test.next().list() )
+			_topicsDiff = _difference( _before, test.next().list() )
 				
 			return
 		
@@ -185,7 +186,7 @@ describe "----- hyperrequest TESTS -----", ->
 			nsqTopics.on( "remove", _check )
 			
 			# step to the next test
-			_topicsDiff = _.difference( _before, test.next().list() )
+			_topicsDiff = _difference( _before, test.next().list() )
 
 			return
 		
@@ -246,8 +247,8 @@ describe "----- hyperrequest TESTS -----", ->
 			
 			# step to the next test
 			_after = test.next().list()
-			_topicsRem = _.difference( _before, _after )
-			_topicsAdd = _.difference( _after, _before )
+			_topicsRem = _difference( _before, _after )
+			_topicsAdd = _difference( _after, _before )
 
 			return
 		
@@ -283,7 +284,7 @@ describe "----- hyperrequest TESTS -----", ->
 			nsqTopics.on( "add", _check )
 			
 			# step to the next test
-			_topicsDiff = _.difference( test.next().list(), _before )
+			_topicsDiff = _difference( test.next().list(), _before )
 			
 			return
 			
@@ -383,7 +384,7 @@ describe "----- hyperrequest TESTS -----", ->
 					
 					# step to the next test
 					_before = test.list()
-					_topicsDiff = _.difference( test.next().list(), _before )
+					_topicsDiff = _difference( test.next().list(), _before )
 				
 				, 1000 )
 				return

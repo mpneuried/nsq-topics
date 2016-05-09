@@ -5,10 +5,17 @@
 
 # **npm modules**
 async = require( "async" )
-_ = require( "lodash" )
+_compact = require( "lodash/compact" )
+_difference = require( "lodash/difference" )
+_isString = require( "lodash/isString" )
+_isArray = require( "lodash/isArray" )
+_isFunction = require( "lodash/isFunction" )
+_isRegExp = require( "lodash/isRegExp" )
+
+request = require( "hyperrequest" )
 
 # **internal modules**
-request = require( "hyperrequest" )
+Config = require "./config"
 
 TOPICS = []
 
@@ -27,10 +34,29 @@ class NsqTopics extends require( "mpbasic" )()
 			# **active** *Boolean* Configuration to (de)activate the nsq topics
 			active: true
 
-	constructor: ->
+	constructor: ( options = {} )->
+		@connected = false
 		@ready = false
-		
-		super
+
+		@on "_log", @_log
+
+		@getter "classname", ->
+			return @constructor.name.toLowerCase()
+
+		# extend the internal config
+		if options instanceof Config
+			@config = options
+		else
+			@config = new Config( @extend( @defaults(), options ) )
+
+		if not @config.active
+			@log "warning", "disabled"
+			return
+
+		# init errors
+		@_initErrors()
+
+		@debug "loaded"
 		
 		@list = @_waitUntil( @_list, "ready" )
 		
@@ -76,7 +102,7 @@ class NsqTopics extends require( "mpbasic" )()
 			@warning "nsq topics disabled"
 			return
 		
-		if _.isString( @config.lookupdHTTPAddresses )
+		if _isString( @config.lookupdHTTPAddresses )
 			aFns = [ @_fetch( @config.lookupdHTTPAddresses ) ]
 		else
 			aFns = for host in @config.lookupdHTTPAddresses
@@ -87,7 +113,7 @@ class NsqTopics extends require( "mpbasic" )()
 				@error "multi fetch", err
 				return
 				
-			aTopics = _.compact( results )
+			aTopics = _compact( results )
 			if not aTopics.length
 				_err = @_handleError( true, "EUNAVAILIBLE" )
 				
@@ -117,8 +143,8 @@ class NsqTopics extends require( "mpbasic" )()
 		return
 		
 	_setTopicList: ( _topics )=>
-		_removedTopics = _.difference( TOPICS, _topics )
-		_newTopics = _.difference( _topics, TOPICS )
+		_removedTopics = _difference( TOPICS, _topics )
+		_newTopics = _difference( _topics, TOPICS )
 		
 		if not _removedTopics.length and not _newTopics.length
 			@debug "no topic change"
@@ -144,7 +170,7 @@ class NsqTopics extends require( "mpbasic" )()
 			# delete teh current filter
 			@topicFilter = null
 		
-		else if _.isString( filter )
+		else if _isString( filter )
 			# if the string filter starts with "regexp:" interpret it as a regular expression
 			if filter[0..6] is "regexp:"
 				regexp = new RegExp(filter[7..])
@@ -154,15 +180,15 @@ class NsqTopics extends require( "mpbasic" )()
 			@topicFilter = ( testT )->
 				return testT is filter
 
-		else if _.isArray( filter )
+		else if _isArray( filter )
 			@topicFilter = ( testT )->
 				return testT in filter
 
-		else if _.isFunction( filter )
+		else if _isFunction( filter )
 			@topicFilter = ( testT )->
 				return filter( testT )
 
-		else if _.isRegExp( filter )
+		else if _isRegExp( filter )
 			@topicFilter = ( testT )->
 				return filter.test( testT )
 		
@@ -192,7 +218,7 @@ class NsqTopics extends require( "mpbasic" )()
 					cb( null, null )
 					return
 
-				if _.isString( result.body )
+				if _isString( result.body )
 					_body = JSON.parse( result.body )
 				else
 					_body = result.body

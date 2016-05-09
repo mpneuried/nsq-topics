@@ -9,7 +9,8 @@ test = require( "./data" )
 
 class TopicSimulator extends require('events').EventEmitter
 	servers: []
-	serverPorts: [ 4161, 4163 ]
+	serverPorts: [ 4165, 4167 ]
+	host: "127.0.0.1"
 	
 	constructor: ->
 		@running = false
@@ -41,7 +42,7 @@ class TopicSimulator extends require('events').EventEmitter
 		@started = 0
 		_that = @
 		for port in @serverPorts
-			@servers.push @app.listen port, ->
+			@servers.push @app.listen port, @host, ->
 				port = @address().port
 				console.log( "NSQlookupd Simulation listening on port `%s`", port )
 				_that.started++
