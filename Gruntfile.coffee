@@ -38,6 +38,7 @@ module.exports = (grunt) ->
 				require: [ "should" ]
 				reporter: "spec"
 				bail: ( if process.env.BAIL? then true else false )
+				grep: process.env.GREP
 				timeout: 3000
 				slow: 3
 
@@ -47,41 +48,23 @@ module.exports = (grunt) ->
 					env:
 						severity_heartbeat: "debug"
 		
-		
-		docker:
-			serverdocs:
-				expand: true
-				src: ["_src/**/*.coffee", "README.md"]
-				dest: "_docs/"
-				options:
-					onlyUpdated: false
-					colourScheme: "autumn"
-					ignoreHidden: false
-					sidebarState: true
-					exclude: false
-					lineNums: true
-					js: []
-					css: []
-					extras: []
-		
-
 	# Load npm modules
 	grunt.loadNpmTasks "grunt-contrib-watch"
 	grunt.loadNpmTasks "grunt-contrib-coffee"
 	grunt.loadNpmTasks "grunt-contrib-clean"
 	grunt.loadNpmTasks "grunt-mocha-cli"
 	grunt.loadNpmTasks "grunt-include-replace"
-	grunt.loadNpmTasks "grunt-docker"
 
-	# just a hack until this issue has been fixed: https://github.com/yeoman/grunt-regarde/issues/3
-	grunt.option('force', not grunt.option('force'))
-	
 	# ALIAS TASKS
 	grunt.registerTask "default", "build"
-	grunt.registerTask "docs", "docker"
 	grunt.registerTask "clear", [ "clean:base" ]
 	grunt.registerTask "test", [ "build", "mochacli:main" ]
+	
+	# ALIAS SHORT TASKS
+	grunt.registerTask "w", "watch"
+	grunt.registerTask "b", "build"
+	grunt.registerTask "t", "test"
 
 	# build the project
 	grunt.registerTask "build", [ "clear", "coffee:base", "includereplace" ]
-	grunt.registerTask "build-dev", [ "clear", "coffee:base", "docs", "test" ]
+	grunt.registerTask "build-dev", [ "clear", "coffee:base", "test" ]
