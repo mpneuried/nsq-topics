@@ -24,7 +24,8 @@ class NsqTopics extends require( "mpbasic" )()
 
 	# ## defaults
 	defaults: =>
-		@extend super,
+		data = super()
+		@extend data,
 			# **lookupdHTTPAddresses** *String|String[]* A single or multiple nsqlookupd hosts.
 			lookupdHTTPAddresses: [ "127.0.0.1:4161" ]
 			# **lookupdHTTPAddresses** *Number* Time in seconds to poll the nsqlookupd servers to sync the availible topics
@@ -35,13 +36,11 @@ class NsqTopics extends require( "mpbasic" )()
 			active: true
 
 	constructor: ( options = {} )->
+		super()
 		@connected = false
 		@ready = false
 
 		@on "_log", @_log
-
-		@getter "classname", ->
-			return @constructor.name.toLowerCase()
 
 		# extend the internal config
 		if options instanceof Config
@@ -229,7 +228,7 @@ class NsqTopics extends require( "mpbasic" )()
 			return
 	
 	ERRORS: =>
-		@extend super,
+		@extend super(),
 			"EUNAVAILIBLE": [ 404, "No nsq-lookup servers availible" ]
 			"EINVALIDFILTER": [ 500, "Only `null` valiables of type `String`, `Array`, `Function` or `RegExp` are allowed as filter" ]
 

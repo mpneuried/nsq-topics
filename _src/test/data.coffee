@@ -8,18 +8,18 @@ for idx in [ 0..3 ]
 	topics.push genTopic()
 
 _data = [
-	 utils.clone( ( topics ) ),
-	 utils.clone( ( topics.push( genTopic() ); topics ) ),
-	 utils.clone( ( topics.push( genTopic() ); topics.push( genTopic() ); topics ) ),
-	 utils.clone( ( topics.push( genTopic() ); topics.push( genTopic() ); topics ) ),
-	 utils.clone( ( topics.splice(0,1); topics ) ),
-	 utils.clone( ( topics.splice(0,2); topics ) ),
-	 utils.clone( ( topics.splice(0,2); topics ) ),
-	 utils.clone( ( topics.push( genTopic() ); topics.push( genTopic() ); topics.splice(0,2); topics ) ),
-	 utils.clone( ( topics.push( "_" + genTopic() ); topics.push( genTopic() + "_" ); topics ) ),
-	 utils.clone( ( topics.push( genTopic() ); topics.push( genTopic() ); topics ) ),
-	 utils.clone( ( topics.push( genTopic() ); topics ) ),
-	 utils.clone( ( topics.push( genTopic() ); topics ) )
+	utils.clone( ( topics ) ),
+	utils.clone( ( topics.push( genTopic() ); topics ) ),
+	utils.clone( ( topics.push( genTopic() ); topics.push( genTopic() ); topics ) ),
+	utils.clone( ( topics.push( genTopic() ); topics.push( genTopic() ); topics ) ),
+	utils.clone( ( topics.splice(0,1); topics ) ),
+	utils.clone( ( topics.splice(0,2); topics ) ),
+	utils.clone( ( topics.splice(0,2); topics ) ),
+	utils.clone( ( topics.push( genTopic() ); topics.push( genTopic() ); topics.splice(0,2); topics ) ),
+	utils.clone( ( topics.push( "_" + genTopic() ); topics.push( genTopic() + "_" ); topics ) ),
+	utils.clone( ( topics.push( genTopic() ); topics.push( genTopic() ); topics ) ),
+	utils.clone( ( topics.push( genTopic() ); topics ) ),
+	utils.clone( ( topics.push( genTopic() ); topics ) )
 ]
 _len = _data.length
 

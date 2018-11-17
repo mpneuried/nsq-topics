@@ -13,6 +13,7 @@ class TopicSimulator extends require('events').EventEmitter
 	host: "127.0.0.1"
 	
 	constructor: ->
+		super()
 		@running = false
 		@started = 0
 		

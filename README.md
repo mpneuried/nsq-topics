@@ -203,6 +203,7 @@ topics.on( "ready", function( err ){
 ## Release History
 |Version|Date|Description|
 |:--:|:--:|:--|
+|0.0.6|2018-11-17|Updated dependencies|
 |0.0.5|2016-07-18|Updated dependencies and removed generated code docs from repo|
 |0.0.4|2016-05-09|Updated dependencies. Especially lodash to 4.x|
 |0.0.3|2016-02-19|Fixed default configuration|

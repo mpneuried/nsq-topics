@@ -1,6 +1,6 @@
 {
   "name": "nsq-topics",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Nsq helper to poll a nsqlookupd service for all it's topics and mirror it locally.",
   "keywords": [],
   "homepage": "https://github.com/mpneuried/nsq-topics",
@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "async": "2.0.x",
+    "async": "2.6.x",
     "hyperrequest": "0.1.x",
     "lodash": "4.x",
     "mpbasic": "0.0.x"
@@ -32,12 +32,12 @@
     "body-parser": "1.x",
     "express": "4.x",
     "grunt": "1.x",
-    "grunt-contrib-clean": "1.x",
-    "grunt-contrib-coffee": "1.x",
-    "grunt-include-replace": "4.x",
-    "grunt-mocha-cli": "2.x",
+    "grunt-contrib-clean": "2.x",
+    "grunt-contrib-coffee": "2.x",
+    "grunt-include-replace": "5.x",
+    "grunt-mocha-cli": "4.x",
     "grunt-contrib-watch": "1.x",
     "morgan": "1.x",
-    "should": "9.x"
+    "should": "13.x"
   }
 }
