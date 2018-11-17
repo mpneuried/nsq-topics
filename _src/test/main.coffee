@@ -48,8 +48,9 @@ describe "----- hyperrequest TESTS -----", ->
 			return
 		return
 
-	after ( done )->
+	after ( done )->		
 		done()
+		process.exit(0)
 		return
 
 	describe 'Main Tests', ->
@@ -393,11 +394,14 @@ describe "----- hyperrequest TESTS -----", ->
 			return
 			
 		it "all lookup servers down ... error event", ( done )->
-			
+			@timeout( 3000 )
 			# listen to the add event
 			nsqTopics.on "error", ( err )->
+				console.log('err', err.name);
+				
 				should.exist( err )
-				err.should.have.property( "name" ).and.equal( "EUNAVAILIBLE" )
+				err.should.have.property( "name" )
+				err.name.should.equal( "EUNAVAILIBLE" )
 				done()
 				return
 			

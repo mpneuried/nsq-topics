@@ -56,6 +56,7 @@ class TopicSimulator extends require('events').EventEmitter
 			console.log( "NSQlookupd Simulation on port `%s` - SHUTDOWN!", @servers[ idx ].address().port )
 			@servers[ idx ].close()
 			@servers[ idx ] = null
+			delete @servers[ idx ]
 		return
 
 module.exports = new TopicSimulator()

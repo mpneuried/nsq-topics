@@ -16,7 +16,8 @@
     "url": "https://github.com/mpneuried/nsq-topics.git"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "grunt": "grunt"
   },
   "engines": {
     "node": ">= 0.10.0"
