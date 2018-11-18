@@ -34,7 +34,7 @@
     "express": "4.x",
     "grunt": "1.x",
     "grunt-contrib-clean": "2.x",
-    "grunt-contrib-coffee": "2.x",
+    "grunt-contrib-coffee": "1.x",
     "grunt-include-replace": "5.x",
     "grunt-mocha-cli": "4.x",
     "grunt-contrib-watch": "1.x",
