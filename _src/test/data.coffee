@@ -31,10 +31,7 @@ _current = ->
 	
 fn = ->
 	_resp =
-		"status_code": 200
-		"status_txt": "OK"
-		"data":
-			"topics": _current()
+		"topics": _current()
 	return _resp
 	
 	

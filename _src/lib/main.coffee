@@ -222,8 +222,10 @@ class NsqTopics extends require( "mpbasic" )()
 				else
 					_body = result.body
 
-				if _body.status_code is 200
-					cb( null, _body?.data?.topics or [] )
+				if result.statusCode is 200
+					cb( null, _body?.topics or [] )
+				else
+
 				return
 			return
 	
