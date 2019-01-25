@@ -203,6 +203,7 @@ topics.on( "ready", function( err ){
 ## Release History
 |Version|Date|Description|
 |:--:|:--:|:--|
+|1.1.0|2019-01-25|now able to handle the formats of nsq < and > 1.x|
 |1.0.0|2019-01-25|updated topic response handler to match nsq >= 1.x format|
 |0.0.6|2018-11-17|Updated dependencies|
 |0.0.5|2016-07-18|Updated dependencies and removed generated code docs from repo|

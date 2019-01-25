@@ -1,6 +1,6 @@
 {
   "name": "nsq-topics",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Nsq helper to poll a nsqlookupd service for all it's topics and mirror it locally.",
   "keywords": [],
   "homepage": "https://github.com/mpneuried/nsq-topics",

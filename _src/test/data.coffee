@@ -30,10 +30,16 @@ _current = ->
 	return _data[ idx ]
 	
 fn = ->
-	_resp =
-		"topics": _current()
+	if( utils.randRange( 0,1 ) )
+		_resp =
+			"status_code": 200
+			"status_txt": "OK"
+			"data":
+				"topics": _current()
+	else
+		_resp =
+			"topics": _current()
 	return _resp
-	
 	
 fn.next = ->
 	idx++
